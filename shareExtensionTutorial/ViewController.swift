@@ -2,17 +2,26 @@
 //  ViewController.swift
 //  shareExtensionTutorial
 //
-//  Created by Mauro on 24/05/2017.
-//  Copyright © 2017 n/a. All rights reserved.
-//
 
 import UIKit
 
 class ViewController: UIViewController {
 
     override func viewDidLoad() {
+        
         super.viewDidLoad()
-        // Do any additional setup after loading the view, typically from a nib.
+        
+        let fileManager = FileManager.default
+        
+        if let directory = fileManager.containerURL(forSecurityApplicationGroupIdentifier: "group.maledettobue.container") {
+            
+            let newDirectory = directory.appendingPathComponent("my_dir")
+            
+            let directoryContents = try? FileManager.default.contentsOfDirectory(at: newDirectory, includingPropertiesForKeys: nil, options: [])
+            
+            print(directoryContents ?? "File is not here")
+            
+        }
     }
 
     override func didReceiveMemoryWarning() {
